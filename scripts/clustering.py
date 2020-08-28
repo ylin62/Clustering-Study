@@ -34,10 +34,11 @@ def make_video(target, freq, path):
         ax.clear()
         centerx, centery = [], []
         for s, item in enumerate(target[i]):
+            car_id = np.argwhere(cars==item[-1])[0][0]
             h = np.deg2rad(item[4])
             rot = np.array([[np.cos(h), -np.sin(h)], [np.sin(h), np.cos(h)]])
-            ax.plot(np.dot(rot, carsize)[0] + item[0], np.dot(rot, carsize)[1] + item[1], '-', lw=LW, color=colors[s], 
-                    label=int(item[-1]))
+            ax.plot(np.dot(rot, carsize)[0] + item[0], np.dot(rot, carsize)[1] + item[1], '-', lw=LW, color=colors[car_id], 
+                    label=car_id)
             centerx += [item[0]]
             centery += [item[1]]
         ax.axis('equal')
